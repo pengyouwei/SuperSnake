@@ -3,19 +3,20 @@
 constexpr int MAX_NUM = 35;
 
 struct Dot {
-	double x, y; // ×ø±ê
-	double dx, dy; // xÖáºÍyÖáµÄÔöÁ¿£¨´úÌæËÙ¶È£©
-	double theta; // ·¢Éä½Ç¶È
-	double w; // ×ÔĞı½ÇËÙ¶È
-
+	double x, y; // åæ ‡
+	double dx, dy; // xè½´å’Œyè½´çš„å¢é‡ï¼ˆä»£æ›¿é€Ÿåº¦ï¼‰
+	double theta; // å‘å°„è§’åº¦
+	double w; // è‡ªæ—‹è§’é€Ÿåº¦
+	int size; // ç²’å­å¤§å°
+	
 	void Draw(int camera_x, int camera_y, int r, int g, int b);
 };
 
 class Particle {
 public:
-	int num; // Á£×Ó¸öÊı
+	int num; // ç²’å­ä¸ªæ•°
 	Dot dot[MAX_NUM];
-	double speed; // ·¢ÉäËÙ¶È
+	double speed; // å‘å°„é€Ÿåº¦
 
 	int r, g, b;
 
