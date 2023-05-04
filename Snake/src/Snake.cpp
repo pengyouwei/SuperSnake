@@ -160,10 +160,13 @@ void Snake::Stop()
 	RECT r = { 0, 0, WIDTH, HEIGHT };
 	drawtext("GAME PAUSE", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
+	mciSendString("stop bkmusic", 0, 0, 0);
+
 	while (1) {
 		if (_kbhit()) {
 			char k = _getch();
 			if (k == ' ') {
+				mciSendString("play bkmusic", 0, 0, 0);
 				break;
 			}
 		}

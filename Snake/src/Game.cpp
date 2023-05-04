@@ -41,6 +41,7 @@ void Game::GameOver()
 	settextstyle(90, 50, "Consolas");
 	RECT r = { 0, 0, WIDTH, HEIGHT };
 	
+	mciSendString("close bkmusic", 0, 0, 0);
 
 	while (1) {
 		if (_kbhit()) {
@@ -118,7 +119,8 @@ void Game::Init()
 	// ª≠«Ω±⁄
 	DrawWall();
 	// ±≥æ∞“Ù¿÷
-	mciSendString("play assets/bk.mp3 repeat", 0, 0, 0);
+	mciSendString("open assets/bk.mp3 alias bkmusic", 0, 0, 0);
+	mciSendString("play bkmusic repeat", 0, 0, 0);
 }
 
 void Game::Play()
