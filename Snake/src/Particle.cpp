@@ -5,13 +5,13 @@
 #include <graphics.h>
 
 #define PI acos(-1)
-constexpr double G = 0.001; // ÀàËÆÖØÁ¦¼ÓËÙ¶È,Ê¹Á£×ÓÓĞÏòÏÂµôµÄÇ÷ÊÆ
+constexpr double G = 0.001; // ç±»ä¼¼é‡åŠ›åŠ é€Ÿåº¦,ä½¿ç²’å­æœ‰å‘ä¸‹æ‰çš„è¶‹åŠ¿
 
 void Dot::Draw(int camera_x, int camera_y, int r, int g, int b)
 {
 	setfillcolor(RGB(r, g, b)), setlinecolor(RGB(r, g, b));
-	// setfillcolor(RGB(180, 180, 180)), setlinecolor(RGB(180, 180, 180)); // °×É«
-	fillrectangle(x + camera_x, y + camera_y, x + 10 + camera_x, y + 10 + camera_y);
+	// setfillcolor(RGB(180, 180, 180)), setlinecolor(RGB(180, 180, 180)); // ç™½è‰²
+	fillrectangle(x + camera_x, y + camera_y, x + size + camera_x, y + size + camera_y);
 }
 
 void Particle::Init(int food_x, int food_y, int blockSize)
@@ -25,15 +25,18 @@ void Particle::Init(int food_x, int food_y, int blockSize)
 	num = 30;
 	for (int i = 0; i < num; i++) {
 
-		speed = rand() % 10 / 10.0; // ËÙ¶ÈËæ»ú
+		speed = rand() % 10 / 10.0; // é€Ÿåº¦éšæœº
 
 		dot[i].x = rand() % blockSize + food_x;
 		dot[i].y = rand() % blockSize + food_y;
 
-		dot[i].theta = rand() % 360 / 180.0 * PI; // ·¢Éä½ÇËæ»ú
-		// ¸ù¾İ·¢ÉäËÙ¶È¼ÆËã x ÖáºÍ y ÖáµÄ·ÖËÙ¶È
+		dot[i].theta = rand() % 360 / 180.0 * PI; // å‘å°„è§’éšæœº
+		// æ ¹æ®å‘å°„é€Ÿåº¦è®¡ç®— x è½´å’Œ y è½´çš„åˆ†é€Ÿåº¦
 		dot[i].dx = speed * cos(dot[i].theta);
 		dot[i].dy = speed * -sin(dot[i].theta);
+		
+		// dot[i].size = 10;
+		dot[i].size = rand() % 10 + 5; // ç²’å­å¤§å°éšæœº
 
 	}
 }
@@ -41,11 +44,11 @@ void Particle::Init(int food_x, int food_y, int blockSize)
 void Particle::Draw(int camera_x, int camera_y, int r, int g, int b)
 {
 	for (int i = 0; i < num; i++) {
-		// ×ø±ê³ÖĞø±ä»¯
+		// åæ ‡æŒç»­å˜åŒ–
 		dot[i].x += dot[i].dx;
 		dot[i].y += dot[i].dy;
 
-		// ÏòÏÂµÄËÙ¶ÈÔ½À´Ô½¿ì
+		// å‘ä¸‹çš„é€Ÿåº¦è¶Šæ¥è¶Šå¿«
 		dot[i].dy += G;
 
 		dot[i].Draw(camera_x, camera_y, r, g, b);
